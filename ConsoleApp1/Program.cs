@@ -40,9 +40,9 @@ namespace Стек {
                         Console.Clear();
                         Console.WriteLine("Введите слово:");
                         s = Console.ReadLine();
-                        if (s.All(char.IsLetter) & s.Length!=0){
+                        if (s.All(char.IsLetter) && s.Length!=0){
                             stroka.Push(s);
-                            Console.WriteLine($"Слово {s} добавлено в стек");
+                            Console.WriteLine($"Слово {s} добавлено в стек\nНажмите Enter для продолжения.");
                         }
                         else
                         {
@@ -55,33 +55,37 @@ namespace Стек {
                         Console.Clear();
                         if (stroka.Count != 0)
                         {
-                            Console.WriteLine($"Слово {stroka.Pop()} извлечено успешно");
+                            Console.WriteLine($"Слово {stroka.Pop()} извлечено успешно\nНажмите Enter для продолжения.");
                         }
                         else
                         {
-                            Console.WriteLine("Стек пуст!");
+                            Console.WriteLine("Стек пуст!\nНажмите Enter для продолжения.");
                         }
                         break;
                         case 3: //Проверка на непустоту/длину стека
                         Console.Clear();
                         if(stroka.Count != 0)
                         {
-                            Console.WriteLine($"Длина стека = {stroka.Count}");
+                            foreach(string tempS in stroka)
+                            {
+                                Console.WriteLine(tempS + " ");
+                            }
+                            Console.WriteLine("Нажмите Enter для продолжения.");
                         }
                         else
                         {
-                            Console.WriteLine("Стек пуст!");
+                            Console.WriteLine("Стек пуст!\nНажмите Enter для продолжения.");
                         }
                         break;
                         case 4: // Последнее введеное слово
                         Console.Clear();
                         if (stroka.Count != 0)
                         {
-                            Console.WriteLine($"Последнее введенное слово: {stroka.Peek()}");
+                            Console.WriteLine($"Последнее введенное слово: {stroka.Peek()}\nНажмите Enter для продолжения.");
                         }
                         else
                         {
-                            Console.WriteLine("Стек пуст!");
+                            Console.WriteLine("Стек пуст!\nНажмите Enter для продолжения.");
                         }
                         break;
                         case 5: //Проверить наличие слова в стеке
@@ -92,7 +96,7 @@ namespace Стек {
                         if (stroka.Contains(s))
                         {
                             Console.Clear();
-                            Console.WriteLine($"Слово {s} есть в стеке");
+                            Console.WriteLine($"Слово {s} есть в стеке\nНажмите Enter для продолжения.");
                         }
                         else
                         {
@@ -110,7 +114,7 @@ namespace Стек {
                                     {
                                         Console.Clear();   
                                         stroka.Push(s);
-                                        Console.WriteLine($"Слово {s} добавлено в стек");
+                                        Console.WriteLine($"Слово {s} добавлено в стек\nНажмите Enter для продолжения.");
                                     }
                                     else
                                     {
@@ -121,7 +125,7 @@ namespace Стек {
 
                         }
                         break;
-                    case 6:
+                    case 6:// очистка стека
                         Console.Clear();
                         Console.WriteLine("Вы действительно хотите очистить стек?\n1 - да\n0 - нет");
                         int.TryParse(Console.ReadLine(), out b);
@@ -140,10 +144,71 @@ namespace Стек {
 
                         }
                         break;
+                    case 7:
+                        Console.Clear();
+                        Console.WriteLine("Введите слова, которые нужно поменять местами");
+                        Console.WriteLine("Введите первое слово:");
+                        string s1 = Console.ReadLine();
+                        Console.WriteLine("Введите второе слово:");
+                        string s2 = Console.ReadLine();
+                        if(stroka.Contains(s1) && stroka.Contains(s2))
+                        {
+                            SwapElementsInStack(stroka, s1, s2);
+                            Console.WriteLine($"Элементы {s1} и {s2} успешно поменялись местами\nНажмите Enter для продолжения");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Один из элементов отсутсвует в стеке\nНажмите Enter для продолжения");
+                        }
+                        break;
+                        case 8:
+                        Console.Clear();
+                        Console.WriteLine("Для выхода нажмите Esc");
+                        break;
+                    default:
+                        Console.WriteLine("Ошибка ввода!\nДля продолжения нажмите Enter");
+                        break;
+
+
 
                 }
             }
             while(Console.ReadKey(true).Key != ConsoleKey.Escape);
-        }  
+        }
+        static void SwapElementsInStack(Stack<string> stack, string s1, string s2)
+        {
+            bool f1 = true;
+            bool f2 = true;
+
+            Stack<string> tempStack = new Stack<string>();
+            while(f1 || f2)
+            {
+                if (stack.Peek() == s1 && f1) { 
+                    f1 = false;
+                    tempStack.Push(s2);
+                    if (stack.Count>0)
+                    {
+                        stack.Pop();
+                    }
+                }
+                else if(stack.Peek() == s2 && f2) { 
+                    f2 = false;
+                    tempStack.Push(s1);
+                    if (stack.Count > 0)
+                    {
+                        stack.Pop();
+                    }
+                }
+                else
+                {
+                    tempStack.Push(stack.Pop());
+                }
+            }
+            while (tempStack.Count > 0)
+            {
+                stack.Push(tempStack.Pop());
+            }
+
+        }
     }
 }
