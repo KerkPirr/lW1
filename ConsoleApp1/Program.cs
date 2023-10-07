@@ -21,6 +21,8 @@ namespace Стек {
             Stack<string> stroka = new Stack<string>();
             int b;
             string s;
+            List<char> vowels = new List<char> { 'a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y', 'у', 'е', 'ы', 'а', 'о', 'э', 'я', 'и', 'ю', 'У', 'Е', 'Ы', 'А', 'О', 'Э', 'Я', 'И', 'Ю' };
+            
             do
             {
                 Console.Clear();
@@ -32,7 +34,8 @@ namespace Стек {
                 Console.WriteLine("5 - проверить наличие элемента в стеке");
                 Console.WriteLine("6 - удалить стек");
                 Console.WriteLine("7 - поменять элементы местами");
-                Console.WriteLine("8 - выход.");
+                Console.WriteLine("8 - Вставить слово, которое начинается с гласной");
+                Console.WriteLine("9 - выход.");
                 int.TryParse(Console.ReadLine(), out int a);
                 switch (a)
                 {
@@ -165,6 +168,23 @@ namespace Стек {
                         }
                         break;
                         case 8:
+                        Console.Clear();
+                        Console.WriteLine("Введите слово, которое начинается с гласной");
+                        s = Console.ReadLine();
+                        char firstChar = s[0];
+                        if(vowels.Contains(firstChar) && s.All(char.IsLetter) && s.Length != 0)
+                        {
+                            stroka.Push(s);
+                            Console.WriteLine($"Слово {s} добавлено в стек\nНажмите Enter для продолжения.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ошибка ввода!\nСлово должно начинаться с гласной и содержать только буквы!\nНажмите Enter для продолжения.\n");
+                            Console.ReadLine();
+                            goto case 8;
+                        }
+                        break;
+                        case 9:
                         Console.Clear();
                         Console.WriteLine("Для выхода нажмите Esc");
                         break;
