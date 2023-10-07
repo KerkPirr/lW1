@@ -154,14 +154,14 @@ namespace Стек {
                         string s1 = Console.ReadLine();
                         Console.WriteLine("Введите второе слово:");
                         string s2 = Console.ReadLine();
-                        if(stroka.Contains(s1) && stroka.Contains(s2))
+                        if(stroka.Contains(s1) && stroka.Contains(s2) && s1!=s2)
                         {
                             SwapElementsInStack(stroka, s1, s2);
                             Console.WriteLine($"Элементы {s1} и {s2} успешно поменялись местами\nНажмите Enter для продолжения");
                         }
                         else
                         {
-                            Console.WriteLine("Один из элементов отсутсвует в стеке\nНажмите Enter для продолжения");
+                            Console.WriteLine("Невозможно поменять элементы местами!\nНажмите Enter для продолжения");
                         }
                         break;
                         case 8:
