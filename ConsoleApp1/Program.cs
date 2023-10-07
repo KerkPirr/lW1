@@ -19,7 +19,7 @@ namespace Стек {
         {
 
             Stack<string> stroka = new Stack<string>();
-            int a, b, c;
+            int b;
             string s;
             do
             {
@@ -33,7 +33,7 @@ namespace Стек {
                 Console.WriteLine("6 - удалить стек");
                 Console.WriteLine("7 - поменять элементы местами");
                 Console.WriteLine("8 - выход.");
-                int.TryParse(Console.ReadLine(), out a);
+                int.TryParse(Console.ReadLine(), out int a);
                 switch (a)
                 {
                     case 1: //Добавление элемента в стек
@@ -101,11 +101,11 @@ namespace Стек {
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine($"В стеке нет слова {s}, хотите его добавить?\n1 - да\n0 - нет");
+                            Console.WriteLine($"В стеке нет слова {s}, хотите его добавить?\n1 - да\nЛюбая другая клавиша для отмены");
                             int.TryParse(Console.ReadLine(), out b);
                             switch(b)
                             {
-                                case 0:
+                                default:
                                     Console.Clear();
                                     Console.WriteLine($"Слово {s} не будет добавлено в стек.\nНажмите Enter для продолжения.");
                                 break;
@@ -121,17 +121,18 @@ namespace Стек {
                                         Console.WriteLine("Ошибка ввода!\nДоступно использование только букв!\nНажмите Enter для продолжения.\n");
                                     }
                                     break;
+                                
                             }
 
                         }
                         break;
                     case 6:// очистка стека
                         Console.Clear();
-                        Console.WriteLine("Вы действительно хотите очистить стек?\n1 - да\n0 - нет");
+                        Console.WriteLine("Вы действительно хотите очистить стек?\n1 - да\nЛюбая другая клавиша для отмены");
                         int.TryParse(Console.ReadLine(), out b);
                         switch (b)
                         {
-                            case 0:
+                            default:
                                 Console.Clear();
                                 Console.WriteLine("Отмена очистки стека.\nДля продолжения нажмите Enter");
                                 break;
@@ -140,6 +141,8 @@ namespace Стек {
                                 stroka.Clear();
                                 Console.WriteLine("Стек очищен!\nДля продолжения нажмите Enter");
                                 break;
+                           
+
 
 
                         }
